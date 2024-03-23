@@ -1,0 +1,19 @@
+Package: protein.nankai
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person("Cyan", "Yan", , "cyan_cg@outlook.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0002-2236-5476"))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Imports:
+    pepXMLTab,
+    rlang,
+    shiny,
+    shinyFiles
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
