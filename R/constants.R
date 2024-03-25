@@ -1,0 +1,1 @@
+SETTING_RDS_PATH <- "protein.nankai.setting.rds" 

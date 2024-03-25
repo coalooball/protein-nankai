@@ -1,7 +1,7 @@
 server <- function(input, output) {
     options(shiny.maxRequestSize=500*1024^2)
     file_root = reactive({
-        input$load_file_root
+        input$setting.search_file_root_dir
     })
     
     get_file_root = reactive({
@@ -65,6 +65,9 @@ server <- function(input, output) {
         output$analyzing_info <- renderText({ 
             paste0("Loaded Pepxml File: ", pepxml_name(), " .")
         });
+    })
+    observeEvent(input$setting.save, {
+        saveRDS(input$setting.search_file_root_dir, "protein.nankai.setting.rds")
     })
     output$bool_analyzing <- reactive({FALSE})
     output$is_selected_pepxml_file1 <- reactive({
