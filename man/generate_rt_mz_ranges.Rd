@@ -23,5 +23,7 @@ generate_rt_mz_ranges(sequence, rt, mz, charge, rt_tolerance, mz_tolerance)
 Define a function that takes a peptide name and outputs the ranges of rt and mz.
 }
 \examples{
-count_carbon_atoms("ACDE")
+generate_rt_mz_ranges(
+   "AGPQAKK", 
+   as.double("213.421"), as.double("123.12"), as.numeric("2"), 15, 10)
 }
