@@ -3,6 +3,10 @@ server <- function(input, output) {
     file_root = reactive({
         input$setting.search_file_root_dir
     })
+
+    current_task_name <- reactive({
+        input$create_task.task_name
+    })
     
     get_file_root = reactive({
         if (nchar(file_root()) == 0) {
@@ -53,15 +57,28 @@ server <- function(input, output) {
         output$analyzing_info <- renderText({ 
             paste0("Loading Pepxml File: ", pepxml_name(), " ...")
         });
-        output$pepxml_file1_contents <- renderTable({
+        # output$pepxml_file1_contents <- renderTable({
             
-            ext <- tools::file_ext(pepxml_name())
+        #     ext <- tools::file_ext(pepxml_name())
 
-            req(file)
-            validate(need(ext == "xml", "Please upload a pep.xml file"))
+        #     req(file)
+        #     validate(need(ext == "xml", "Please upload a pep.xml file"))
             
-            pepXML2tab(pepxml_name())
-        })
+        #     pepXML2tab(pepxml_name())
+        # })
+        task_result_path <- paste(
+            PROTEIN_NANKAI, 
+            randomStrings(n = 1, len=18),
+            RDS_EXT,
+            sep="."
+        )
+        t_time <- as.character(now())
+        task_name <- as.character(now())
+        if (nchar(current_task_name()) != 0){
+            task_name = current_task_name()
+        }
+        t = TaskData(task_name, t_time, list())
+        saveRDS(t, task_result_path)
         output$analyzing_info <- renderText({ 
             paste0("Loaded Pepxml File: ", pepxml_name(), " .")
         });

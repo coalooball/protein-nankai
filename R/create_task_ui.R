@@ -26,6 +26,20 @@ create_task_ui <- function() {
         conditionalPanel(
             condition = "output.show_analyzing_btn",
             fluidRow(
+                column(6,
+                    textInput(
+                        "create_task.task_name", 
+                        "Task Name", 
+                        value = "", 
+                        width = NULL, 
+                        placeholder = "The name of task."
+                    )
+                )
+            )
+        ),
+        conditionalPanel(
+            condition = "output.show_analyzing_btn",
+            fluidRow(
                 column(2,
                     actionButton("analyzing_data", "Analyzing", class = "btn-success")
                 ),
