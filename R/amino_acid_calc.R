@@ -63,6 +63,32 @@ count_carbon_atoms <- function(sequence) {
     sum_amino_acids(sequence)[["C"]]
 }
 
+#' Generating ranges
+#'
+#' Define a function that takes a peptide name and outputs the ranges of rt and mz.
+#'
+#' @param sequence Alphabetical sequence of peptides
+#' @param rt rt
+#' @param mz mz
+#' @param charge charge
+#' @param rt_tolerance rt_tolerance
+#' @param mz_tolerance mz_tolerance
+#' @export
+#' @examples
+#' count_carbon_atoms("ACDE")
+generate_rt_mz_ranges <- function(sequence, rt, mz, charge, rt_tolerance, mz_tolerance) {
+  num_c <- count_carbon_atoms(sequence)
+  rt_ranges <- list(c(rt - rt_tolerance, rt + rt_tolerance), c(rt - rt_tolerance, rt + rt_tolerance))
+  mz_ranges <- list(
+    c(mz - mz_tolerance + 1/charge*-1, mz + mz_tolerance + 1/charge*-1),
+    c(mz - mz_tolerance + 1/charge*0, mz + mz_tolerance + 1/charge*0)
+  )
+  for (i in 1:num_c) {
+    rt_ranges <- c(rt_ranges, list(c(rt - rt_tolerance, rt + rt_tolerance)))
+    mz_ranges <- c(mz_ranges, list(c(mz - mz_tolerance + 1/charge*i, mz + mz_tolerance + 1/charge*i)))
+  }
+  list(rt_ranges=rt_ranges, mz_ranges=mz_ranges)
+}
 
 atomic_properties <- list(
   C = data.frame(
