@@ -4,3 +4,6 @@
 .httr-oauth
 .DS_Store
 .quarto
+.Rapp.history
+protein.nankai.setting.rds
+protein.nankai.*.rds

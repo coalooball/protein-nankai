@@ -84,7 +84,7 @@ server <- function(input, output) {
         });
     })
     observeEvent(input$setting.save, {
-        saveRDS(input$setting.search_file_root_dir, "protein.nankai.setting.rds")
+        saveRDS(input$setting.search_file_root_dir, SETTING_RDS_PATH)
     })
     output$bool_analyzing <- reactive({FALSE})
     output$is_selected_pepxml_file1 <- reactive({

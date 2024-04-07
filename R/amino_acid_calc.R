@@ -79,6 +79,9 @@ count_carbon_atoms <- function(sequence) {
 #'    "AGPQAKK", 
 #'    as.double("213.421"), as.double("123.12"), as.numeric("2"), 15, 10)
 generate_rt_mz_ranges <- function(sequence, rt, mz, charge, rt_tolerance, mz_tolerance) {
+  rt <- as.double(rt)
+  mz <- as.double(mz)
+  charge <- as.numeric(charge)
   num_c <- count_carbon_atoms(sequence)
   rt_ranges <- list(c(rt - rt_tolerance, rt + rt_tolerance), c(rt - rt_tolerance, rt + rt_tolerance))
   mz_ranges <- list(
@@ -132,9 +135,7 @@ generate_points_as_EICs <- function(raw_data, ranges) {
       int_max = temp_max
     }
   }
-  rt_min_max <- c(rt_min, rt_max)
-  int_min_max <- c(int_min, int_max)
-  eic_results
+  EicResults(rt_min_max, int_min_max, eic_results)
 }
 
 atomic_properties <- list(
